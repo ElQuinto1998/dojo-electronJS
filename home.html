@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container-fluid" style="text-align: center">
+
+        <header>
+            <div class="row" style="background-color: #2D353F; color: white">
+                <h1>CRUD ELECTRON</h1>
+            </div>
+        </header>
+
+        <div class="row">
+
+            <h3>Nombre del archivo:</h3>
+            <input type="text" class="form-control" name="" id="nombre">
+        </div>
+        <div class="row">
+            <h3>Contenido:</h3>
+            <input type="text" class="form-control" name="" id="contenido">
+        </div>
+        <br>
+        <div class="row">
+
+            <div class="col-md-4">
+                <button type="button" id="btnSave" class="btn btn-dark">Guardar</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" id="btnRead" class="btn btn-dark">Leer</button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" id="btnDelete" class="btn btn-dark">Eliminar</button>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <script>
+
+        var file = require('fs');
+        const path = require('path');
+        const url = require('url');
+
+        const btnRead = document.getElementById('btnRead');
+        const btnSave = document.getElementById('btnSave');
+        const btnDelete = document.getElementById('btnDelete');
+        const name = document.getElementById('nombre');
+        const content = document.getElementById('contenido');
+
+        const ruta = path.join(__dirname, 'files');
+
+        btnSave.addEventListener('click', () => {
+
+            var fileq = path.join(ruta, name.value);
+            var contents = content.value;
+            file.writeFile(fileq, contents, (err) => {
+
+                if (err) {
+                    return console.log(err);
+                } else {
+                    console.log('Archivo leido');
+
+                }
+
+            });
+
+
+        });
+
+        btnRead.addEventListener('click', () => {
+
+            var fileq = path.join(ruta, name.value);
+            file.readFile(fileq, (err, data) => {
+
+                if (err) {
+                    console.log('Error');
+
+                } else {
+                    content.value = data;
+                    console.log('Archivo leido');
+                    
+                }
+
+            });
+
+        });
+
+        btnDelete.addEventListener('click', () => {
+
+            var fileq = path.join(ruta, name.value);
+            file.unlink(fileq, (err) =>{
+
+                if(err){
+                    console.log('Error al eliminar');
+                    
+                }else{
+                    econsole.log('Archivo Eliminado');
+                    
+                }
+
+            });
+
+        });
+
+
+    </script>
+</body>
+
+</html>

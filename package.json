@@ -1,0 +1,30 @@
+{
+  "name": "crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "pack": "build --dir",
+    "dist": "build",
+    "start": "electron main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andres Quinto",
+  "license": "MIT",
+  "build": {
+    "appId": "Crud",
+    "asar": true,
+    "win": {
+      "target": "NSIS",
+      "icon": "build/logo.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^3.0.6",
+    "electron-builder": "^20.28.4"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
+}
